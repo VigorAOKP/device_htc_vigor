@@ -2,12 +2,13 @@
 # system.prop for vigor
 #
 
-ro.sf.lcd_density = 320
+ro.sf.lcd_density=320
 
 # RIL properties
 # cm props
+ril.subscription.types=RUIM
+ro.telephony.ril_class=HTCVigorQualcommRIL
 mobiledata.interfaces = rmnet0,rmnet_sdio0
-ro.telephony.ril_class = HTCVigorQualcommRIL
 ro.telephony.default_network = 8
 telephony.lteOnCdmaDevice = 1
 
@@ -27,15 +28,6 @@ persist.rild.ril.ltedr = 0
 persist.rild.ril.ltedrtable=max_retries=infinite,10000
 DEVICE_PROVISIONED = 1
 ro.baseband.arch = svlte2a
-
-# graphics
-debug.composition.type = dyn
-debug.enabletr = true
-debug.sf.hw = 1
-debug.egl.hw = 1
-ro.opengles.version = 131072
-ro.sf.compbypass.enable = 1
-debug.qctwa.preservebuf = 1
 
 # For QC perf binary hooks
 ro.vendor.extension_library = /system/lib/libqc-opt.so
@@ -77,13 +69,16 @@ ro.config.lte = true
 ro.config.svlte1x = true
 
 gsm.sim.operator.alpha = Verizon
-gsm.sim.operator.numeric = 310012
+gsm.sim.operator.numeric = 311480
 gsm.sim.operator.iso-country = us
 gsm.operator.alpha = Verizon
-gsm.operator.numeric = 310012
+gsm.operator.numeric = 311480
 gsm.operator.iso-country = us
 ro.cdma.home.operator.alpha = Verizon
-ro.cdma.home.operator.numeric = 310012
+ro.cdma.home.operator.numeric = 311480
+
+# Device needs to get CDMA subscription when RUIM is ready
+ro.cdma.subscribe_on_ruim_ready = true
 
 # For Verizon data retry configuration
 ro.cdma.data_retry_config = max_retries=infinite,0,0,60000,120000,480000,900000
@@ -111,15 +106,21 @@ persist.timed.enable = true
 ro.ril.def.agps.mode = 6
 
 # audio
-lpa.decode = true
+lpa.decode = false
 lpa.use-stagefright = true
+media.stagefright.enable-player = true
+media.stagefright.enable-http = true
+media.stagefright.enable-fma2dp = false
+media.stagefright.enable-aac = true
+media.stagefright.enable-qcp = true
+media.stagefright.enable-scan = true
+mmp.enable.3g2=true
+use.non-omx.mp3.decoder = true
+use.non-omx.aac.decode = true
 media.a1026.nsForVoiceRec = 0
 media.a1026.enableA1026 = 0
 htc.audio.alt.enable = 0
 htc.audio.hac.enable = 0
-
-# wifi
-wifi.interface = wlan0
 
 # data module
 ro.use_data_netmgrd = true
@@ -152,3 +153,14 @@ ro.modem.load.release_key = true
 
 # UMS
 persist.sys.usb.config = mass_storage,adb
+ro.vold.umsdirtyratio=50
+
+# Scrolling Tweaks
+windowsmgr.max_events_per_sec=180
+ro.max.fling_velocity=14000
+ro.min.fling_velocity=8000
+view.scroll_friction=0
+
+# Disable error checking
+ro.kernel.android.checkjni=0
+ro.kernel.checkjni=0
